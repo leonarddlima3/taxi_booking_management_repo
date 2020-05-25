@@ -23,9 +23,9 @@ Modules consists
 
 Technical Specifications
 ------------------------
-Platform framework : (Java v8, Spring boot v2.3.0)
+1. Platform framework : (Java v8, Spring boot v2.3.0)
     Used for the business logic and to serve the requests to the Back-end.
-Database : (SQLite v3.31.1)
+2. Database : (SQLite v3.31.1)
     Used for in memory database to store Taxi, Customer, Ride details.
-Memory: (Hashing)
+3. Memory: (Hashing)
     Used for storing the location data for the Taxi in terms of latitude and longitude for faster search across the platform.
