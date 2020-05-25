@@ -1,17 +1,15 @@
-package com.fuber.taxi.service;
+package com.fuber.taxi.dao;
 
 import com.fuber.taxi.to.Customer;
 import com.fuber.taxi.to.CustomerLocation;
-import com.fuber.taxi.to.CustomerRidePreference;
 import com.fuber.taxi.to.Ride;
-import com.fuber.taxi.to.RideCost;
 import com.fuber.taxi.to.Taxi;
 import com.fuber.taxi.to.TaxiLocation;
 
 
-public interface TaxiService {
+public interface TaxiDao {
 	
-	void registerTaxi(Taxi taxi);
+	public void registerTaxi(Taxi taxi);
 	
 	void updateTaxiLocationDetails(TaxiLocation taxiLocation);
 	
@@ -19,12 +17,14 @@ public interface TaxiService {
 	
 	void updateCustomerLocationDetails(CustomerLocation customerLocation);
 	
-	Taxi callTaxi(CustomerRidePreference customerRidePreference);
+	Taxi callTaxi(String taxiType);
 	
-	public void blockRide(Taxi taxi);
+	TaxiLocation getCurrentTaxiLocationDetails(String vehicleNumber);
 	
 	void startRide(Ride ride);
 	
-	RideCost endRide(Ride ride);
+	void endRide(Ride ride);
+	
+	String getTaxiType(String vehicleNumber);
 
 }

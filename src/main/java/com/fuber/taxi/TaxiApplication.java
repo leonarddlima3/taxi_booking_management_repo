@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @SpringBootApplication
@@ -24,6 +25,9 @@ public class TaxiApplication {
 	@Autowired
 	Environment env;
 	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
@@ -34,9 +38,19 @@ public class TaxiApplication {
 			for(String beanName: beanNames) {
 				System.out.println(beanName);
 			}
+			
+			//create the database tables
+			jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS taxi(vehicleNumber VARCHAR(100) PRIMARY KEY, vehicleModel VARCHAR(100), driverName VARCHAR(100), taxiType VARCHAR(100))");
+			jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS taxiLocationDetails(vehicleNumber VARCHAR(100) PRIMARY KEY, latitude INTEGER, longitude INTEGER, timestampValue VARCHAR(100))");
+			jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS customer(customerKey VARCHAR(100) PRIMARY KEY, customerName VARCHAR(100), mobileNo INTEGER)");
+			jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS customerLocationDetails(customerKey VARCHAR(100) PRIMARY KEY, latitude INTEGER, longitude INTEGER, timestampValue VARCHAR(100))");
+			jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS ride(vehicleNumber VARCHAR(100), customerKey VARCHAR(100) PRIMARY KEY, sourceLatitude INTEGER, sourceLongitude INTEGER, destinationLatitude INTEGER, destinationLongitude INTEGER, sourceTimestampValue VARCHAR(100), destinationTimestampValue VARCHAR(100))");
+			
+			
 		};
 	}
 	
+	@Bean
 	public DataSource dataSource() {
 		final DriverManagerDataSource dataSource=new DriverManagerDataSource();
 		dataSource.setDriverClassName(env.getProperty("driverClassName"));
@@ -46,5 +60,7 @@ public class TaxiApplication {
 		
 		return dataSource;
 	}
+	
+	
 
 }
