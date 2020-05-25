@@ -2,8 +2,11 @@ package com.fuber.taxi.util;
 
 import java.sql.Timestamp;
 
+import org.springframework.stereotype.Component;
+
 import com.fuber.taxi.to.Ride;
 
+@Component
 public class TaxiUtil {
 	
 	public static double getDistanceOfTwoPointsInKilometres(int point1x, int point1y, int point2x, int point2y) {

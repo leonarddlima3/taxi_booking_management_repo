@@ -35,10 +35,10 @@ public class TaxiController {
 		try {
 			taxiService.registerTaxi(taxi);
 		} catch(Exception e) {
-			return new ResponseEntity<Response>(new Response("500", "Error occured while trying to register taxi!", ""), HttpStatus.BAD_GATEWAY);
+			return new ResponseEntity<Response>(new Response("502", "Error occured while trying to register taxi!", ""), HttpStatus.BAD_GATEWAY);
 		}
 		
-		return new ResponseEntity<Response>(new Response("200", "Taxi Registered Successfully", ""), HttpStatus.ACCEPTED);
+		return new ResponseEntity<Response>(new Response("202", "Taxi Registered Successfully", ""), HttpStatus.ACCEPTED);
 	}
 	
 	/*
@@ -51,10 +51,10 @@ public class TaxiController {
 		try {
 			taxiService.updateTaxiLocationDetails(taxiLocation);
 		} catch(Exception e) {
-			return new ResponseEntity<Response>(new Response("500", "Error occured while trying to update taxi location details!", ""), HttpStatus.BAD_GATEWAY);
+			return new ResponseEntity<Response>(new Response("502", "Error occured while trying to update taxi location details!", ""), HttpStatus.BAD_GATEWAY);
 		}
 		
-		return new ResponseEntity<Response>(new Response("200", "Taxi Location Details Updated Successfully", ""), HttpStatus.ACCEPTED);
+		return new ResponseEntity<Response>(new Response("202", "Taxi Location Details Updated Successfully", ""), HttpStatus.ACCEPTED);
 	}
 	
 	/*
@@ -67,10 +67,10 @@ public class TaxiController {
 		try {
 			taxiService.registerCustomer(customer);
 		} catch(Exception e) {
-			return new ResponseEntity<Response>(new Response("500", "Error occured while trying to register taxi!", ""), HttpStatus.BAD_GATEWAY);
+			return new ResponseEntity<Response>(new Response("502", "Error occured while trying to register taxi!", ""), HttpStatus.BAD_GATEWAY);
 		}
 		
-		return new ResponseEntity<Response>(new Response("200", "Customer Registered Successfully", ""), HttpStatus.ACCEPTED);
+		return new ResponseEntity<Response>(new Response("202", "Customer Registered Successfully", ""), HttpStatus.ACCEPTED);
 	}
 	
 	/*
@@ -83,10 +83,10 @@ public class TaxiController {
 		try {
 			taxiService.updateCustomerLocationDetails(customerLocation);
 		} catch(Exception e) {
-			return new ResponseEntity<Response>(new Response("500", "Error occured while trying to update customer location details!", ""), HttpStatus.BAD_GATEWAY);
+			return new ResponseEntity<Response>(new Response("502", "Error occured while trying to update customer location details!", ""), HttpStatus.BAD_GATEWAY);
 		}
 		
-		return new ResponseEntity<Response>(new Response("200", "Customer Location Details Updated Successfully", ""), HttpStatus.ACCEPTED);
+		return new ResponseEntity<Response>(new Response("202", "Customer Location Details Updated Successfully", ""), HttpStatus.ACCEPTED);
 	}
 	
 	
@@ -103,13 +103,13 @@ public class TaxiController {
 		
 		try {
 			if(taxi==null) {
-				return new ResponseEntity<Response>(new Response("200", "Taxi Not Available near your location", taxi), HttpStatus.ACCEPTED);
+				return new ResponseEntity<Response>(new Response("202", "Taxi Not Available near your location", taxi), HttpStatus.ACCEPTED);
 			} else {
 				taxiService.blockRide(taxi);//taxi blocked after assigned for a ride
-				return new ResponseEntity<Response>(new Response("200", "Called Taxi Successfully", taxi), HttpStatus.ACCEPTED);
+				return new ResponseEntity<Response>(new Response("202", "Called Taxi Successfully", taxi), HttpStatus.ACCEPTED);
 			}
 		} catch(Exception e) {
-			return new ResponseEntity<Response>(new Response("500", "Error occured while trying to find a taxi!", ""), HttpStatus.BAD_GATEWAY);
+			return new ResponseEntity<Response>(new Response("502", "Error occured while trying to find a taxi!", ""), HttpStatus.BAD_GATEWAY);
 		}
 		
 		
@@ -127,10 +127,10 @@ public class TaxiController {
 			taxiService.startRide(ride);
 			
 		} catch(Exception e) {
-			return new ResponseEntity<Response>(new Response("500", "Error occured while trying to start a ride!", ""), HttpStatus.BAD_GATEWAY);
+			return new ResponseEntity<Response>(new Response("502", "Error occured while trying to start a ride!", ""), HttpStatus.BAD_GATEWAY);
 		}
 		
-		return new ResponseEntity<Response>(new Response("200", "Ride Started Successfully", ""), HttpStatus.ACCEPTED);
+		return new ResponseEntity<Response>(new Response("202", "Ride Started Successfully", ""), HttpStatus.ACCEPTED);
 		
 	}
 	
@@ -146,13 +146,13 @@ public class TaxiController {
 		try {
 			rideCost = taxiService.endRide(ride);
 		} catch(Exception e) {
-			return new ResponseEntity<Response>(new Response("500", "Error occured while trying to end a ride!", ""), HttpStatus.BAD_GATEWAY);
+			return new ResponseEntity<Response>(new Response("502", "Error occured while trying to end a ride!", ""), HttpStatus.BAD_GATEWAY);
 		}
 		
 		if(rideCost==null) {
-			return new ResponseEntity<Response>(new Response("500", "Error occured while trying to end a ride!", ""), HttpStatus.BAD_GATEWAY);
+			return new ResponseEntity<Response>(new Response("502", "Error occured while trying to end a ride!", ""), HttpStatus.BAD_GATEWAY);
 		} else {
-			return new ResponseEntity<Response>(new Response("200", "Ride Ended Successfully", rideCost), HttpStatus.ACCEPTED);
+			return new ResponseEntity<Response>(new Response("202", "Ride Ended Successfully", rideCost), HttpStatus.ACCEPTED);
 		}
 		
 		
